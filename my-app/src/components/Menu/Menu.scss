@@ -1,0 +1,12 @@
+.menu{
+    
+    &-list{
+        display: flex;
+        flex-direction: column;
+        row-gap: 40px;
+    }
+
+    &-list-item a{
+        color: #80858B;
+    }
+}

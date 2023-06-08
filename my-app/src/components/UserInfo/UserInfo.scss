@@ -1,0 +1,17 @@
+.userinfo{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    &__initials{
+        background: #7B61FF;
+        border-radius: 10px;
+        padding: 16px;
+    }
+
+    &__name{
+        display: flex;
+        gap: 50px;
+        align-items: center;
+    }
+}

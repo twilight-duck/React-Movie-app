@@ -1,0 +1,25 @@
+.container {
+    max-width: 1795px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 auto;
+    padding: 40px 62px;
+}
+
+.dark {
+    color: #fff;
+    background-color: #313037;
+
+    svg {
+        path {
+            fill: #fff;
+        }
+    }
+}
+
+.light {
+    color: #313037;
+    background-color: #F3F3F3;
+}
