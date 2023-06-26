@@ -1,0 +1,14 @@
+.light{
+    background-color: #fff;
+    color: #000;
+}
+
+.dark{
+    background: #000;
+    display: flex;
+
+
+    & svg path{
+        fill: #80858B;
+    }
+}

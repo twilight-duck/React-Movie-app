@@ -1,0 +1,53 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    gap: 45px;
+    align-items: center;
+    margin-bottom: 50px;
+
+    &-search{
+        width: 100%;
+        position: relative;
+
+        &-input{
+            padding: 16px 10px;
+            background: #323537;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+            font-weight: 500;
+            font-family: 'Exo 2', sans-serif;
+            font-size: 16px;
+            line-height: 24px;
+            color: white;
+            overflow: hidden;
+
+            &.dark{
+                background-color: #323537;
+            }
+            
+            &.light{
+                background-color: #fff;
+                border: 2px solid #AFB2B6;
+                color: #000;
+            }
+
+            &:focus{
+                border: 2px solid #7B61FF;
+            }
+
+            &:disabled{
+                background: #80858B;
+                color: #AFB2B6;
+                cursor: not-allowed;
+            }
+    
+        }
+    }
+
+    &-filter-icon{
+        position: absolute;
+        right: -10px;
+    }
+
+}

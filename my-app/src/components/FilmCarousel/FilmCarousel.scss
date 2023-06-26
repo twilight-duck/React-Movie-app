@@ -1,0 +1,36 @@
+.all-pages-container{
+    display: flex;
+    gap: 40px;
+}
+
+.window{
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+}
+
+.main-container{
+    width: 1184px;
+}
+
+.recommendations{
+
+
+    &-wrapper{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 40px;
+    }
+
+    &-controls{
+        display: flex;
+        align-items:flex-start ;
+        justify-content: center;
+    }
+}
+
+
+.arrow-left{
+    transform: rotate(-180deg);
+    margin-top: -4px;
+}

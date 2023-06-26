@@ -1,0 +1,15 @@
+.arrow-button{
+
+    &:hover svg path{
+        stroke: #AFB2B6;
+    }
+
+    &.disabled svg path{
+        stroke: #80858B;
+    }
+
+}
+
+svg path{
+    transition: all ease 0.3s;
+}

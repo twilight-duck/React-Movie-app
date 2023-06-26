@@ -1,4 +1,10 @@
 .menu{
+
+    &-svg{
+       svg{
+        fill: white;
+       }
+    }
     
     &-list{
         display: flex;
@@ -6,7 +12,31 @@
         row-gap: 40px;
     }
 
-    &-list-item a{
+    &-list-item{
+       
+    & svg path{
+        transition: all ease 0.3s;
+    }
+
+    & a{
         color: #80858B;
+        transition: all ease 0.3s;
+    }
+
+    &:hover a{
+        color: #917CFF;
+    }
+
+    &:hover svg path{
+        fill: #917CFF;
+    }
+
+    }
+
+    &-list-link{
+        display: flex;
+        align-items: center;
+        gap: 20px;
     }
 }
+

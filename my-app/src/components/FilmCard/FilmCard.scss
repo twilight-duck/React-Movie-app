@@ -1,0 +1,25 @@
+.film-card{
+
+    &-title{
+        cursor: pointer;
+        transition: all ease 0.3s;
+
+
+        &:hover{
+            color: #7B61FF;
+        }
+    }
+
+    &-image{
+    transition: transform 0.3s;
+    
+    & img{
+        border-radius: 10px;
+    }
+    
+    &:hover{
+    cursor: pointer;
+    transform: scale(0.9);
+}
+}
+}

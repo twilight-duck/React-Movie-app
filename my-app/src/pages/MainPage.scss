@@ -1,0 +1,17 @@
+.main-page{
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 auto;
+    
+
+    &-content{
+        display: flex;
+        gap: 184px;
+       
+    }
+
+    &-footer{
+       flex: 0 0 auto;
+       padding-bottom: 40px;
+    }
+}
