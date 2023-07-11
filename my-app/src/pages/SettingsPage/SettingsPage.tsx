@@ -4,13 +4,17 @@ import { Input } from '../../components/Input/Input';
 import { Menu } from '../../components/Menu/Menu';
 import { PageTemplate } from '../../components/PageTemplate/PageTemplate';
 import { Toggle } from '../../components/Toggle/Toggle';
-import { useAppContext } from '../../contexts/AppContext';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { toggleThemeAction } from '../../store/theme/actions';
+import { TOGGLE_THEME } from '../../store/theme/actionTypes';
+import { isDarkTheme } from '../../store/theme/selectors';
 import './SettingsPage.scss';
 
 interface ISettingsPage {
+    onClick: () => void;
 }
 
-export const SettingsPage: FC<ISettingsPage> = () => {
+export const SettingsPage: FC<ISettingsPage> = ({onClick}) => {
     const [filmTitle, setFilmTitle] = useState('');
     const handleFilmTitle = (newValue: string) => {
         setFilmTitle(newValue);
@@ -46,23 +50,25 @@ export const SettingsPage: FC<ISettingsPage> = () => {
         console.log('Форма отправляется на сервер');
     }
 
-    const { toggleTheme, isDarkTheme } = useAppContext();
+    const isDark = useAppSelector(isDarkTheme)
+
+    const dispatch = useAppDispatch();
 
     return (
-        <PageTemplate isOpen={false} filmTitle={handleFilmTitle}>
+        <PageTemplate isOpen={false} filmTitle={handleFilmTitle} onClick={onClick}>
             <div className='settings-page'>
             <Menu/>
             <div className='settings'>
                 <div className='settings-profile'>
                     <h2 className='settings-profile-title'>Profile</h2>
-                    <div className={`settings-profile-info ${isDarkTheme() ? 'dark' : 'light'}`}>
+                    <div className={`settings-profile-info ${isDark ? 'dark' : 'light'}`}>
                         <Input value={name} handleChange={handleChangeName} title={'Name'}/>
                         <Input value={email} handleChange={handleChangeEmail} title={'Email'}/>
                     </div>
                 </div>
                 <div className='settings-password'>
                     <h2 className='settings-password-title'>Password</h2>
-                    <div className={`settings-password-info ${isDarkTheme() ? 'dark' : 'light'}`}>
+                    <div className={`settings-password-info ${isDark ? 'dark' : 'light'}`}>
                         <div className='old-password'>
                             <Input value={password} handleChange={handleChangePassword} title={'Password'} placeholder='Your Password'/>
                         </div>
@@ -75,12 +81,12 @@ export const SettingsPage: FC<ISettingsPage> = () => {
                 </div>
                 <div className='settings-color-mode'>
                     <h2 className='settings-color-mode-title'>Color Mode</h2>
-                    <div className={`settings-color-mode-info ${isDarkTheme() ? 'dark' : 'light'}`}>
+                    <div className={`settings-color-mode-info ${isDark ? 'dark' : 'light'}`}>
                         <div className='color-mode-info-text'>
                             <h4 className='color-mode-dark'>Dark</h4>
                             <p className='color-mode-dark-text'>Use dark theme</p>
                         </div>
-                       <button className='color-mode-toggler' onClick={toggleTheme}>
+                       <button className='color-mode-toggler' onClick={() => dispatch(toggleThemeAction())}>
                             <Toggle isDisabled={false}/>
                        </button>
                     </div>

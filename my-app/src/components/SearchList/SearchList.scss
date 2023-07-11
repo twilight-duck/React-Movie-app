@@ -1,0 +1,10 @@
+.search-list{
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+
+
+    &-title{
+        margin-bottom: 40px;
+    }
+}

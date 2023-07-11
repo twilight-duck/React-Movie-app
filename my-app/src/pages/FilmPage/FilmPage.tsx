@@ -14,18 +14,23 @@ import aquaman from "../../assets/images/aquaman.svg";
 import bumblebee from "../../assets/images/bumblebee.svg";
 import joker from "../../assets/images/joker.svg";
 import aladdin from "../../assets/images/Aladdin.svg";
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getFilm } from '../../api/getFilm';
 import { IFullFilm } from '../../interfaces/IFullFilm';
+import { fetchSimilarFilms } from '../../api/fetchSimilarFilms';
+import { FilmCard } from '../../components/FilmCard/FilmCard';
+import { ISimilarFilm } from '../../interfaces/ISimilarFilm';
 
 interface IFilmPage {
+    onClick: () => void;
 }
 
-export const FilmPage: FC<IFilmPage> = () => {
+export const FilmPage: FC<IFilmPage> = ({onClick}) => {
 
     const { id } = useParams();
 
-    const [film, setFilm] = useState<null | IFullFilm>(null);
+    const [film, setFilm] = useState<null | IFullFilm>();
+    const [similarFilms, setSimilarFilms] = useState<null | ISimilarFilm[]>(null);
    
 
     useEffect(() => {
@@ -37,172 +42,111 @@ export const FilmPage: FC<IFilmPage> = () => {
             }
         },[id])
 
+        useEffect(() => {
+            if(id) {
+                fetchSimilarFilms({id}).then((data) => {
+                    setSimilarFilms(data.docs)
+                    console.log(data)
+                })
+                }
+            },[id])
+
     const [filmTitle, setFilmTitle] = useState('');
     const handleFilmTitle = (newValue: string) => {
         setFilmTitle(newValue);
     }
 
+
+    const actors = film?.persons.filter((person => person.profession === 'актеры'));
+    const director = film?.persons.filter((person => person.profession === 'режиссеры'));
+    const writers= film?.persons.filter((person => person.profession === 'редакторы'));
+
+    const navigate = useNavigate();
+
+    const handleClick = (id: string) => {
+        navigate(`/films/${id}`)
+    }
+
     return (
-        <PageTemplate isOpen={false} filmTitle={handleFilmTitle}>
-            {film && (
+        <PageTemplate isOpen={false} filmTitle={handleFilmTitle} onClick={onClick}>
                 <div className='film-page'>
                 <Menu/>
                 <div className='film-page-details'>
                     <div className='film-card'>
                         <div className='film-card-img'>
-                            <img src={film.Poster} alt="" />
+                            <img src={film?.poster.url} alt="" />
                         </div>
                         <ButtonsGroup/>
                     </div>
                     <div className='film-description'>
                         <div className='film-description-breadcrumbs'>
                             <ul className="breadcrumbs">
-                                <li className="breadcrumbs-item">{film.Genre.split(' ')[0].toString().slice(0, -1)}</li>
-                                <li className="breadcrumbs-item">{film.Genre.split(' ')[1].toString().slice(0, -1)}</li>
-                                <li className="breadcrumbs-item">{film.Genre.split(' ')[2].toString()}</li>
+                                <li className="breadcrumbs-item">{film?.genres[0].name}</li>
+                                <li className="breadcrumbs-item">{film?.genres[1]?.name}</li>
+                                <li className="breadcrumbs-item">{film?.genres[2]?.name}</li>
                             </ul>
                         </div>
-                        <h2 className="film-description-title">{film.Title}</h2>
+                        <h2 className="film-description-title">{film?.name}</h2>
                         <div className='film-description-ratings'>
-                            <div className='app-rating'>{film.imdbRating}</div>
-                            <div className='imdb-rating'><img src={imdb} alt=""/>{film.imdbRating}</div>
-                            <div className='film-length'>{film.Runtime}</div>
+                            <div className='app-rating'>{film?.rating.kp.toFixed(1)}</div>
+                            <div className='imdb-rating'><img src={imdb} alt=""/>{film?.rating.imdb}</div>
+                            <div className='film-length'>{film?.movieLength} мин</div>
                         </div>
                         <div className='film-description-plot'>
-                            {film.Plot} 
+                            {film?.description} 
                         </div>
                         <table className='film-description-info'>
                             <tr className='table-cell'>
-                                <td className='table-item'>Year</td>
-                                <td className='table-item'>{film.Year}</td>
+                                <td className='table-item'>Год</td>
+                                <td className='table-item'>{film?.year}</td>
                             </tr>
                             <tr className='table-cell'>
-                                <td className='table-item'>Released</td>
-                                <td className='table-item'>{film.Released}</td>
+                                <td className='table-item'>Мировая премьера</td>
+                                <td className='table-item'>{film?.premiere.world.slice(0, -14)}</td>
                             </tr>
                             <tr className='table-cell'>
-                                <td className='table-item'>BoxOffice</td>
-                                <td className='table-item'>{film.BoxOffice}</td>
+                                <td className='table-item'>Сборы</td>
+                                <td className='table-item'>{film?.fees.world.value} $</td>
                             </tr>
                             <tr className='table-cell'>
-                                <td className='table-item'>Country</td>
-                                <td className='table-item'>{film.Country}</td>
+                                <td className='table-item'>Страна</td>
+                                <td className='table-item'>{film?.countries[0].name}</td>
                             </tr>
                             <tr className='table-cell'>
-                                <td className='table-item'>Production</td>
-                                <td className='table-item'>{film.Production}</td>
+                                <td className='table-item'>Производство</td>
+                                <td className='table-item'>{film?.productionCompanies?.map((company) => company.name).join(', ')}</td>
                             </tr>
                             <tr className='table-cell'>
-                                <td className='table-item'>Actors</td>
-                                <td className='table-item'>{film.Actors}</td>
+                                <td className='table-item'>Актёрский состав</td>
+                                <td className='table-item'>{actors?.map((actor => actor.name)).join(', ')}</td>
                             </tr>
                             <tr className='table-cell'>
-                                <td className='table-item'>Director</td>
-                                <td className='table-item'>{film.Director}</td>
+                                <td className='table-item'>Режиссёр</td>
+                                <td className='table-item'>{director?.map((director => director.name)).join(', ')}</td>
                             </tr>
                             <tr className='table-cell'>
-                                <td className='table-item'>Writers</td>
-                                <td className='table-item'>{film.Writer}</td>
+                                <td className='table-item'>Сценаристы</td>
+                                <td className='table-item'>{writers?.map((writer => writer.name)).join(', ')}</td>
                             </tr>
                         </table>
                         <div className='film-description-recommendations'>
-                            <FilmCarousel>
+                            <FilmCarousel title='Вам также может понравиться'>
+                            {similarFilms && similarFilms.map((movie) =>
+                                //
                                 <div className="recommended-film">
-                                    <img src={starWars} alt="" />
-                                    <div className='recommended-film-info'>
-                                        <h4 className='film-title'>
-                                        Star Wars: The Rise of Skywalker
-                                        </h4>
-                                        <ul className="breadcrumbs">
-                                            <li className="breadcrumbs-item">Adventure</li>
-                                            <li className="breadcrumbs-item">Action</li>
-                                            <li className="breadcrumbs-item">Fantasy</li>
-                                        </ul>
-                                    </div>
+                                    <FilmCard key={movie['id']} id={movie['id'].toString()} title={movie['name']} year={movie['year'].toString()} poster={movie['poster']['url']} onClick={handleClick}/>
+                                    <ul className="breadcrumbs">
+                                         <li className="breadcrumbs-item">{movie.genres[0].name}</li>
+                                         <li className="breadcrumbs-item">{movie.genres[1]?.name}</li>
+                                         <li className="breadcrumbs-item">{movie.genres[2]?.name}</li>
+                                    </ul>
                                 </div>
-                                <div className="recommended-film">
-                                    <img src={bumblebee} alt="" />
-                                    <div className='recommended-film-info'>
-                                        <h4 className='film-title'>
-                                        Bumblebee
-                                        </h4>
-                                        <ul className="breadcrumbs">
-                                            <li className="breadcrumbs-item">Adventure</li>
-                                            <li className="breadcrumbs-item">Action</li>
-                                            <li className="breadcrumbs-item">Fantasy</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div className="recommended-film">
-                                    <img src={avengers} alt="" />
-                                    <div className='recommended-film-info'>
-                                        <h4 className='film-title'>
-                                        Avengers: Endgame 
-                                        </h4>
-                                        <ul className="breadcrumbs">
-                                            <li className="breadcrumbs-item">Adventure</li>
-                                            <li className="breadcrumbs-item">Action</li>
-                                            <li className="breadcrumbs-item">Fantasy</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div className="recommended-film">
-                                    <img src={aquaman} alt="" />
-                                    <div className='recommended-film-info'>
-                                        <h4 className='film-title'>
-                                        Aquaman 2 
-                                        </h4>
-                                        <ul className="breadcrumbs">
-                                            <li className="breadcrumbs-item">Adventure</li>
-                                            <li className="breadcrumbs-item">Action</li>
-                                            <li className="breadcrumbs-item">Fantasy</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div className="recommended-film">
-                                    <img src={joker} alt="" />
-                                    <div className='recommended-film-info'>
-                                        <h4 className='film-title'>
-                                        The Joker
-                                        </h4>
-                                        <ul className="breadcrumbs">
-                                            <li className="breadcrumbs-item">Thriller</li>
-                                            <li className="breadcrumbs-item">Crime</li>
-                                            <li className="breadcrumbs-item">Drama</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div className="recommended-film">
-                                    <img src={aladdin} alt="" />
-                                    <div className='recommended-film-info'>
-                                        <h4 className='film-title'>
-                                        Aladdin
-                                        </h4>
-                                        <ul className="breadcrumbs">
-                                            <li className="breadcrumbs-item">Fiction</li>
-                                            <li className="breadcrumbs-item">Action</li>
-                                            <li className="breadcrumbs-item">Fantasy</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div className="recommended-film">
-                                    <img src={avengers} alt="" />
-                                </div>
-                                <div className="recommended-film">
-                                    <img src={joker} alt="" />
-                                </div>
-                                <div className="recommended-film">
-                                    <img src={starWars} alt="" />
-                                </div>
-                                <div className="recommended-film">
-                                    <img src={aladdin} alt="" />
-                                </div>
+                                 )}
                             </FilmCarousel>
                         </div>
                     </div>
                 </div>
             </div>
-            )}
         </PageTemplate>
     )
 };

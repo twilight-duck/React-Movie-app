@@ -1,0 +1,127 @@
+.modal{
+    height: 100vh;
+    width: 100%;
+    background-color: rgba(0,0,0,0.4);
+    position: fixed;
+    top: 0;
+    right: -100%;
+    overflow: scroll;
+    transform: translate(0, 0);
+    transition: all 0.8s;
+
+    &.active{
+        display: flex;
+        right: 0;
+    }
+
+    &-content{
+        max-width: 470px;
+        background-color: #242426;
+        height: 100vh;
+        padding: 48px 40px;
+        position: absolute;
+        right: 0;
+       
+
+        &-title{
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 24px;
+            margin-bottom: 10px;
+        }
+
+        &-input{
+            background-color: #323537;
+            padding: 16px 20px;
+            border-radius: 10px;
+            border: none;
+            color: #fff;
+            font-family: 'Exo 2', sans-serif;
+            font-weight: 500;
+            line-height: 24px;
+            font-size: 16px;
+            outline: none;
+            width: 100%;
+            max-width: 430px;
+
+            &:focus{
+                border: 2px solid #7B61FF;
+            }
+
+            &::placeholder{
+                font-family: Exo 2, sans-serif;
+                font-weight: 500;
+                line-height: 24px;
+                font-size: 16px;
+            }
+        }
+
+        &-top{
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 48px;
+        }
+
+        &-sortby{
+            padding-bottom: 32px;
+            border-bottom: 2px solid #323537;
+            margin-bottom: 32px;
+
+            &-title{
+                font-size: 16px;
+                font-weight: 600;
+                line-height: 24px;
+                margin-bottom: 10px;
+            }
+        }
+
+        &-movie_name{
+            margin-bottom: 24px;
+        }
+
+
+        &-genre_select{
+            margin-bottom: 24px;
+        }
+
+        &-years{
+            display: flex;
+            
+            flex-direction: column;
+            margin-bottom: 24px;
+
+        &-inputs{
+            display: flex;
+            gap: 40px;
+        }
+
+            & input{
+                width: 174px;
+            }
+        }
+
+        &-rating{
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 24px;
+
+            &-inputs{
+                gap: 40px;
+                display: flex;
+            }
+            & input{
+                width: 174px;
+            }
+        }
+
+        &-country{
+            margin-bottom: 111px;
+        }
+
+        &-buttons{
+            display: flex;
+            gap: 40px;
+        }
+    }
+
+}

@@ -1,6 +1,12 @@
 .list{
-    display: flex;
-    align-items: flex-end;
-    gap: 40px;
-    flex-wrap: wrap;
+   max-width: 1000px;
+   display: flex;
+   flex-wrap: wrap;
+   gap: 30px;
 }
+
+// .block{
+//     display: flex;
+//     flex-wrap: wrap;
+//     gap: 40px;
+// }

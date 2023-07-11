@@ -1,8 +1,9 @@
 import { ButtonGroup } from '@mui/material';
 import { FC, useState } from 'react';
-import { useAppContext } from '../../contexts/AppContext';
 import { MainPage } from '../../pages/MainPage';
 import { SignInPage } from '../../pages/SignInPage/SignInPage';
+import { useAppDispatch } from '../../store/hooks';
+import { toggleThemeAction } from '../../store/theme/actions';
 import { Arrow } from '../Arrow/Arrow';
 import { Button } from '../Button/Button';
 import { ButtonsGroup } from '../ButtonGroup/ButtonsGroup';
@@ -21,22 +22,21 @@ interface IPageTemplate {
     isOpen: boolean;
     filmTitle: any;
     children: any;
+    onClick: () => void;
 }
 
-export const PageTemplate: FC<IPageTemplate> = ({isOpen=false, filmTitle, children}) => {
-    const { toggleTheme, isDarkTheme } = useAppContext();
+export const PageTemplate: FC<IPageTemplate> = ({isOpen=false, filmTitle, children, onClick}) => {
+    const dispatch = useAppDispatch();
 
     const handleToggleTheme = () => {
-        toggleTheme();
+        dispatch(toggleThemeAction());
     }
 
     return (
-        <div className={isDarkTheme() ? 'dark' : 'light'}>
-             <Container>
-                <Header filmTitle={filmTitle} isOpen={false}/>
+        <Container>
+                <Header filmTitle={filmTitle} isOpen={false} onClick={onClick}/>
                     {children}
                 <Footer/>
-            </Container>
-        </div>
-    )
+        </Container>
+            )
 };

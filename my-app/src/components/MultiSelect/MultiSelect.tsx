@@ -1,14 +1,18 @@
-import { FC, useState } from 'react';
+import { FC, ReactNode, useEffect, useState } from 'react';
 import './MultiSelect.scss';
 import Multiselect from 'multiselect-react-dropdown';
 import cancelIcon from '../../assets/icons/cancel.svg'
+import { fetchGenres } from '../../api/fetchGenres';
 
 interface IMultiSelect {
     title: string;
+    options: string[];
 }
 
-export const MultiSelect: FC<IMultiSelect> = ({title}) => {
-    const[options, setOptions] = useState(['Item 1', 'Item 2', 'Item 3', 'Item 4']);
+export const MultiSelect: FC<IMultiSelect> = ({title, options}) => {
+
+    // const[options, setOptions] = useState([]);
+    const[selectedOptions, setSelectedOptions] = useState([]);
     const[style, setStyle] = useState({searchBox: 
         {
             'border': 'none',
@@ -83,14 +87,22 @@ export const MultiSelect: FC<IMultiSelect> = ({title}) => {
         });
     }
 
+    // useEffect(() => {
+    //     fetchGenres().then((data) => {
+    //         setOptions(data)
+    //         console.log(data)
+    //     }
+    // )}, [])
+
+
     return (
-        <div className='multi-select'>
+            <div className='multi-select'>
             <h4 className='multi-select-title'>{title}</h4>
             <Multiselect
                 isObject={false}
                 options={options}
                 style={style}
-                onSelect={handleStyleChange}
+                selectedValues={selectedOptions}
             />  
         </div>
     )

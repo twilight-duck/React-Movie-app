@@ -3,6 +3,16 @@ import './FilmsList.scss';
 import filmImage from '../../assets/images/wonder-woman.svg'
 import { FilmCard } from '../FilmCard/FilmCard';
 import { useNavigate } from 'react-router-dom';
+import { fetchFilms } from '../../api/fetchFilms';
+import { searchFilm } from '../../api/searchFilm';
+import { fetchCartoons } from '../../api/fetchCartoons';
+import SwiperCore, { Autoplay } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { FilmCarousel } from '../FilmCarousel/FilmCarousel';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { getFilmsAction } from '../../store/films/actions';
+import { IFilmParams } from '../../interfaces/IFilmParams';
+import { Pagination } from '../Pagination/Pagination';
 
 interface IFilmList{
     filmTitle: string;
@@ -15,27 +25,33 @@ export const FilmsList: FC<IFilmList> = ({filmTitle}) => {
         navigate(`/films/${id}`)
     }
 
+    const[films, setFilms] = useState([]);
+    const [limit, setLimit] = useState(20);
+    const [totalLimit, setTotalLimit] = useState(0);
 
-    const[film, setFilm] = useState([]);
+
+    const dispatch = useAppDispatch();
+    // const { films, error } = useAppSelector(state => state.films);
+    
     
     useEffect(() => {
-    const getFilms = async () => {
-        const response = await fetch(`http://www.omdbapi.com/?s=${filmTitle}&apikey=96a4368`);
-        const data = await response.json();
-        setFilm(data.Search);
-        console.log(data);
-        return data;
-    }
-    getFilms();
-}, [filmTitle])
+        fetchFilms({filmTitle, limit}).then((data) => {
+            setFilms(data.docs)
+            setTotalLimit(data.total)
+            console.log(data)
+            
+        }
+        )}, [filmTitle, limit])
+    
 
     return (
         <div className='list'>
-            {film && film.map((film, index) => (
-                <div>
-                    <FilmCard key={film['imdbID']} id={film['imdbID']} title={film['Title']} year={film['Year']} poster={film['Poster']} onClick={handleClick}/>
-                </div>
-            ))}
+                {films && films.map((film, index) => (
+                    <FilmCard key={film['id']} id={film['id']} title={film['name']} year={film['year']} poster={film['poster']['url']} onClick={handleClick}/>
+                ))}
+                {limit < totalLimit && 
+                    <button className='list-button' onClick={() => setLimit(limit + 20)}>Show More</button>
+                }
         </div>
-    )
+        )
 };

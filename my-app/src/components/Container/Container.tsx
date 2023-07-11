@@ -1,4 +1,6 @@
 import { FC, ReactNode } from 'react';
+import { useAppSelector } from '../../store/hooks';
+import { isDarkTheme } from '../../store/theme/selectors';
 import './Container.scss';
 // import { useAppContext } from '../../contexts/AppContex';
 
@@ -7,11 +9,13 @@ interface IContainer {
 }
 
 export const Container: FC<IContainer> = ({children}) => {
-    // const { isDarkTheme } = useAppContext();
+    const isDark = useAppSelector(isDarkTheme)
 
     return (
-        <div className='container'>
-            {children}
+         <div className='container-theme'>
+            <div className={`container ${isDark ? 'dark' : 'light'}`}>
+                {children}
+            </div>
         </div>
     )
 };

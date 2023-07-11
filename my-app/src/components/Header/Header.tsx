@@ -10,16 +10,17 @@ import { Container } from '../Container/Container';
 interface IHeader{
     filmTitle: string;
     isOpen: boolean;
+    onClick: () => void;
 }
 
-export const Header: FC<IHeader> = ({filmTitle, isOpen}) => {
+export const Header: FC<IHeader> = ({filmTitle, isOpen, onClick}) => {
        
     return (
             <header className='header'>
                 <div className='header-logo'>
                     <Logo/>
                 </div>
-                <SearchInput filmTitle={filmTitle}/>
+                <SearchInput filmTitle={filmTitle} onClick={onClick}/>
                 <div header-user-box>
                     <UserInfo userName={'Artem Lapitsky'}/>
                 </div>

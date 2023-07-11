@@ -19,6 +19,8 @@
     &-img img{
         margin-bottom: 32px;
         border-radius: 10px;
+        width: 266px;
+        min-height: 356px;
     }
 }
 
@@ -52,6 +54,10 @@
     &-info{
         margin-bottom: 56px;
         max-width: 600px;
+    }
+
+    &-recommendations{
+        display: flex;
     }
 }
 
@@ -100,12 +106,13 @@ td {
 .breadcrumbs{
     display: flex;
     gap: 20px;
+    align-items: center;
     
 
     &-item{
         color: #AFB2B6;
         font-weight: 500;
-        font-size: 16px;
+        font-size: 13.5px;
         line-height: 24px;
         position: relative;
 
@@ -120,6 +127,10 @@ td {
             top: 50%;
             right: -12px;
         }
+
+        &:last-child::after{
+            display: none;
+        }
     }
 
     &-item:nth-last-child(1)::after{
@@ -130,21 +141,45 @@ td {
 .recommended-film{
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 0px;
+    position: relative;
 
+    
 
     & img{
         transition: all ease 0.3s;
         border-radius: 10px;
+        max-width: 266px;
+        min-height: 357px;
     }
 
 
     & img:hover{
         cursor: pointer;
-        transform: scale(0.9);
+    }
+
+    &-info{
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+    }
+
+    &-ranking{
+        position: absolute;
+        background-color: #00A340;
+        padding: 2px 8px;
+        border-radius: 6px;
+        left: 5%;
+        top: 3%;
+        z-index: 100;
+
     }
 }
 
 .film-title{
     margin-bottom: 4px;
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    
 }

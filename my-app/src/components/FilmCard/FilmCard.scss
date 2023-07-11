@@ -1,8 +1,12 @@
 .film-card{
+    width: 266px;
+
 
     &-title{
         cursor: pointer;
-        transition: all ease 0.3s;
+        transition: all ease 0.4s;
+        width: 266px;
+        text-align: center;
 
 
         &:hover{
@@ -15,11 +19,14 @@
     
     & img{
         border-radius: 10px;
+        max-width: 226px;
+        min-height: 356px;
+        transition: all ease 0.5s;
     }
     
     &:hover{
     cursor: pointer;
-    transform: scale(0.9);
+    transform: scale(0.92);
 }
 }
 }

@@ -1,0 +1,20 @@
+export interface ISimilarFilm{
+    alternativeName: string,
+    countries: {name: string}[],
+    description: string,
+    enName: null | string,
+    externalID: Object,
+    genres: {name: string}[],
+    id: number,
+    logo: Object,
+    movieLength: number,
+    name: string,
+    names: Array<Object>,
+    poster:{url: string},
+    rating: {await: null, filmCritics: number, imdb: number, kp: number, russianFilmCritics: number},
+    shortDescription: string,
+    type: string,
+    votes: Object,
+    watchability: Object,
+    year: number
+}
