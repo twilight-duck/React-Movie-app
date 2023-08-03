@@ -1,49 +1,53 @@
-// .all-pages-container{
-//     display: flex;
-//     gap: 40px;
-// }
+.all-pages-container{
+    display: flex;
+    transition: translate;
+    transition-property: transform;
+    transition-duration: 300ms;
+    transition-timing-function: ease-in-out;
+    
+    // gap: 20px;
+}
 
-// .window{
-//     overflow: hidden;
-//     height: 100%;
-//     width: 100%;
-// }
+.window{
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+}
 
-// .main-container{
-//     width: 1184px;
-// }
-
-// .recommendations{
-
-
-//     &-wrapper{
-//         display: flex;
-//         justify-content: space-between;
-//         margin-bottom: 40px;
-//     }
-
-//     &-controls{
-//         display: flex;
-//         align-items:flex-start ;
-//         justify-content: center;
-//     }
-
-//     &-title{
-//         font-size: 24px;
-//     }
-// }
+.main-container{
+    width: 1184px;
+}
 
 
-// .arrow-left{
-//     transform: rotate(-180deg);
-//     margin-top: -4px;
-// }
+.arrow-left{
+    transform: rotate(-180deg);
+    margin-top: -4px;
+}
 
-// .film-carousel{
-//     margin-bottom: 40px;
-// }
+.film-carousel{
+    margin-bottom: 40px;
+}
 
 
-.slider{
-    max-width: 1000px;
+.controls{
+    display: flex;
+    align-items:flex-start ;
+    justify-content: center;
+}
+
+
+.wrapper{
+    display: flex;
+    gap: 300px;
+    margin-bottom: 40px;
+}
+
+.title{
+    font-size: 24px;
+}
+
+.recommendations{
+    display: flex;
+    flex-direction: column;
+   
 }

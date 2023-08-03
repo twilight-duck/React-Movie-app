@@ -45,13 +45,26 @@ export const FilmsList: FC<IFilmList> = ({filmTitle}) => {
     
 
     return (
+        <>
         <div className='list'>
                 {films && films.map((film, index) => (
-                    <FilmCard key={film['id']} id={film['id']} title={film['name']} year={film['year']} poster={film['poster']['url']} onClick={handleClick}/>
+                    <FilmCard 
+                        key={film['id']} 
+                        id={film['id']} 
+                        title={film['name']} 
+                        year={film['year']} 
+                        poster={film['poster']['url']} 
+                        onClick={handleClick} 
+                        rating={film['rating']['imdb']} 
+                        genre={film['genres'][0]['name']}
+                        />
                 ))}
-                {limit < totalLimit && 
+        </div>
+        <div className='list-show-more'>
+            {limit < totalLimit && 
                     <button className='list-button' onClick={() => setLimit(limit + 20)}>Show More</button>
                 }
         </div>
+        </>
         )
 };

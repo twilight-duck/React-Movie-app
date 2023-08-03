@@ -1,5 +1,5 @@
 .modal{
-    height: 100vh;
+    height: 100%;
     width: 100%;
     background-color: rgba(0,0,0,0.4);
     position: fixed;
@@ -16,12 +16,19 @@
 
     &-content{
         max-width: 470px;
-        background-color: #242426;
-        height: 100vh;
+        height: 100%;
         padding: 48px 40px;
         position: absolute;
         right: 0;
-       
+
+
+        &.dark{
+            background-color: #242426;
+        }
+        
+        &.light{
+            background-color: #fff;
+        }
 
         &-title{
             font-size: 16px;
@@ -31,11 +38,9 @@
         }
 
         &-input{
-            background-color: #323537;
             padding: 16px 20px;
             border-radius: 10px;
             border: none;
-            color: #fff;
             font-family: 'Exo 2', sans-serif;
             font-weight: 500;
             line-height: 24px;
@@ -43,6 +48,17 @@
             outline: none;
             width: 100%;
             max-width: 430px;
+
+
+            &.dark{
+                background-color: #323537;
+                color: #fff;
+            }
+
+            &.light{
+                background-color: #fff;
+                border: 2px solid #AFB2B6;
+            }
 
             &:focus{
                 border: 2px solid #7B61FF;

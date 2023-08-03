@@ -1,4 +1,6 @@
 import { FC, useState } from 'react';
+import { useAppSelector } from '../../store/hooks';
+import { isDarkTheme } from '../../store/theme/selectors';
 import { Tab } from '../Tab/Tab';
 import './Tabs.scss';
 
@@ -12,8 +14,10 @@ export const Tabs: FC<ITabs> = () => {
         {id: 2, title: 'Rating', isActive: true, isDisabled: false},
     ]);
 
+    const isDark = useAppSelector(isDarkTheme)
+
     return (
-        <ul className='tabs'>
+        <ul className={`tabs ${isDark ? 'dark' : 'light'}`}>
             {tabs.map(({id, title, isActive, isDisabled}) => (
                     <Tab key={id} title={title} isActive={isActive} isDisabled={isDisabled} />
             ))}

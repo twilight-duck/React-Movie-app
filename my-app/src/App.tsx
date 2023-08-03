@@ -14,13 +14,16 @@ import { NewPasswordPage } from './pages/NewPasswordPage/NewPasswordPage';
 import { FilmPage } from './pages/FilmPage/FilmPage';
 import { SettingsPage } from './pages/SettingsPage/SettingsPage';
 import { Router } from '../src/routes/Router';
+import { useAppSelector } from './store/hooks';
+import { isDarkTheme } from './store/theme/selectors';
 
 
 export default function App() {
  
+  const isDark = useAppSelector(isDarkTheme)
 
   return (
-    <div className="App">
+    <div className = {`App ${isDark ? 'dark' : 'light'}`}>
        <Router/>
     </div>
   );

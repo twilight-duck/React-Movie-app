@@ -3,6 +3,7 @@ import { FC, useState } from 'react';
 import { Form } from '../../../components/Form/Form';
 import './SignIn.scss';
 import { Button } from '../../../components/Button/Button';
+import { Link } from 'react-router-dom';
 
 interface ISignIn{
     message?: string;
@@ -26,8 +27,8 @@ export const SignIn: FC<ISignIn> = ({message}) => {
     return (
         <div className='sign-in'>
             <form className='sign-in-form' action="submit">
-                <h3 className='sign-in-form-title'>Sign In</h3>
-                <p className="sign-in-message">{message}</p>
+            <h3 className='sign-in-form-title'>Sign In</h3>
+                <p className="sign-in-message">{}</p>
                 <div className='email-input'>
                     <Input 
                         value={email} 
@@ -41,13 +42,13 @@ export const SignIn: FC<ISignIn> = ({message}) => {
                         title='Password' 
                         placeholder='Your password'/>
                 <p className='input-message'>Forgot Password?</p>
-                    <Button 
+                <Link to='/films'> <Button 
                         type={'primary'} 
                         content={'Sign In'} 
-                        onClick={handleSubmit}/>
+                        onClick={handleSubmit}/></Link>
                 <p className='sign-in-form-message'>
                     Don't have an account? 
-                    <a href="https://example.com">Sign Up</a>
+                    <Link to='/sign-up'><a href="https://example.com">Sign Up</a></Link>
                 </p>
             </form>
         </div>

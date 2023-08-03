@@ -1,6 +1,7 @@
 .film-page{
     display: flex;
-    gap: 184px;
+    gap: 152px;
+    
 
 
     &-details{
@@ -14,6 +15,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
 
 
     &-img img{
@@ -21,6 +23,23 @@
         border-radius: 10px;
         width: 266px;
         min-height: 356px;
+    }
+
+    &-bookmark {
+        position: absolute;
+        top: 5%;
+        right: 20px;
+        background-color: #323537;
+        padding: 2px 8px;
+        border-radius: 10px;
+        display: none;
+        
+    &.active {
+         background-color: #323537;
+         padding: 2px 8px;
+         border-radius: 10px;
+         display: flex;
+        }
     }
 }
 
@@ -58,6 +77,8 @@
 
     &-recommendations{
         display: flex;
+        max-width: 870px;
+        overflow: hidden;
     }
 }
 
@@ -79,6 +100,10 @@ td {
     font-weight: 600;
     font-size: 16px;
     line-height: 24px;
+
+    &.light{
+        color: #fff;
+    }
 }
 
 .imdb-rating{
@@ -92,6 +117,12 @@ td {
     justify-content: center;
     align-items: center;
     gap: 10px;
+
+
+    &.light{
+        color: #fff;
+    }
+
 }
 
 .film-length{
@@ -101,12 +132,16 @@ td {
     padding: 2px 8px;
     background-color: #323537;
     border-radius: 6px;
+
+    &.light{
+        color: #fff;
+    }
 }
 
 .breadcrumbs{
     display: flex;
     gap: 20px;
-    align-items: center;
+    
     
 
     &-item{
@@ -149,7 +184,7 @@ td {
     & img{
         transition: all ease 0.3s;
         border-radius: 10px;
-        max-width: 266px;
+        min-width: 266px;
         min-height: 357px;
     }
 
@@ -182,4 +217,41 @@ td {
     display: flex;
     align-items: flex-end;
     
+}
+
+.trailer iframe{
+    min-width: 500px;
+    min-height: 300px;
+    border-radius: 10px;
+    margin-bottom: 40px;
+}
+
+.persons{
+    display: flex;
+    gap: 25px;
+    margin-bottom: 40px;
+    align-items: flex-start;
+
+    &-title{
+        margin-bottom: 20px;
+    }
+}
+
+
+.person {
+    
+    
+    
+    & img{
+    min-width: 100px;
+    max-width: 100px;
+    max-height: 200px ;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
+
+
+&-name{
+    text-align: start;
+}
 }

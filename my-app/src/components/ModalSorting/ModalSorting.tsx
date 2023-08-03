@@ -6,6 +6,8 @@ import { Tabs } from '../Tabs/Tabs';
 import { Input } from '../Input/Input';
 import { MultiSelect } from '../MultiSelect/MultiSelect';
 import { Button } from '../Button/Button';
+import { useAppSelector } from '../../store/hooks';
+import { isDarkTheme } from '../../store/theme/selectors';
 
 
 interface IModalSorting {
@@ -29,9 +31,12 @@ export const ModalSorting: FC<IModalSorting> = ({isActive, setIsactive, onClick,
         setValue(newValue);
     }
 
+    const isDark = useAppSelector(isDarkTheme)
+   
+
     return (
         <div className={`modal ${isActive && 'active'}`} onClick={onClick}>
-            <div className='modal-content' onClick={e => e.stopPropagation()}>
+            <div className={`modal-content ${isDark ? 'dark' : 'light'}`} onClick={e => e.stopPropagation()}>
                 <div className='modal-content-top'>
                     <h3 className='modal-content-top-title'>Filters</h3>
                     <button onClick={onClick}><CancelIcon/></button>
@@ -44,28 +49,28 @@ export const ModalSorting: FC<IModalSorting> = ({isActive, setIsactive, onClick,
                     <h4 className='modal-content-title'>Часть названия либо полное название фильма</h4>
                 <input 
                         type="text" 
-                        className='modal-content-input'
+                        className={`modal-content-input ${isDark ? 'dark' : 'light'}`}
                         placeholder='Ваш текст'
                         disabled={false}
                         onChange={(e) => filmName(e.target.value)}
                 />
                 </div>
-                <div className='modal-content-genre_select'>
+                {/* <div className='modal-content-genre_select'>
                     <MultiSelect title='Жанр' options={options}/>
-                </div>
+                </div> */}
                 <div className='modal-content-years'>
                 <h4 className='modal-content-title'>Год</h4>
                     <div className='modal-content-years-inputs'>
                         <input 
                             type="text" 
-                            className='modal-content-input'
+                            className={`modal-content-input ${isDark ? 'dark' : 'light'}`}
                             placeholder='От'
                             disabled={false}
                             onChange={(e) => yearFrom(e.target.value)}
                         />
                         <input 
                             type="text" 
-                            className='modal-content-input'
+                            className={`modal-content-input ${isDark ? 'dark' : 'light'}`}
                             placeholder='До'
                             disabled={false}
                             onChange={(e) => yearTo(e.target.value)}
@@ -77,22 +82,19 @@ export const ModalSorting: FC<IModalSorting> = ({isActive, setIsactive, onClick,
                     <div className='modal-content-rating-inputs'>
                         <input 
                             type="text" 
-                            className='modal-content-input'
+                            className={`modal-content-input ${isDark ? 'dark' : 'light'}`}
                             placeholder='От'
                             disabled={false}
                             onChange={(e) => ratingFrom(e.target.value)}
                         />
                         <input 
                             type="text" 
-                            className='modal-content-input'
+                            className={`modal-content-input ${isDark ? 'dark' : 'light'}`}
                             placeholder='До'
                             disabled={false}
                             onChange={(e) => ratingTo(e.target.value)}
                         />
                     </div>
-                </div>
-                <div className='modal-content-country'>
-                    <MultiSelect title='Страна' options={options}/>
                 </div>
                 <div className='modal-content-buttons'>
                    <Button type={'secondary'} content={'Очистить фильтры'} onClick={onClick}/>

@@ -32,6 +32,7 @@ export const MainPage: FC<IMainPage> = ({}) => {
     const [yearTo, setYearTo] = useState('');
     const [ratingFrom, setRatingFrom] = useState('');
     const [ratingTo, setRatingTo] = useState('');
+    const [limit, setLimit] = useState(20);
 
     const handleYearFrom = (newValue: string) =>{
         setYearFrom(newValue);
@@ -52,17 +53,6 @@ export const MainPage: FC<IMainPage> = ({}) => {
         setFilmTitle(newValue);
     }
 
-    const handleFilmName= (newValue: string) => {
-        setFilmName(newValue);
-    }
-
-    //  useEffect(() => {
-    //     fetchGenres().then((data) => {
-    //         setOptions(data)
-    //         console.log(data)
-    //     }
-    // )}, [])
-
        return (
     <PageTemplate isOpen={false} filmTitle={handleFilmTitle} onClick={handleActive}>
         <div className='main-page'>
@@ -71,10 +61,7 @@ export const MainPage: FC<IMainPage> = ({}) => {
                 <div className='main-page-films'>
                     {filmTitle ? <SearchList 
                                 filmTitle={filmTitle} 
-                                yearFrom={yearFrom} 
-                                yearTo={yearTo} 
-                                ratingFrom={ratingFrom}
-                                ratingTo={ratingTo}
+                                limit={limit}
                                 /> : <FilmsList filmTitle={''}/>}
                 </div>
             </div>
@@ -83,7 +70,7 @@ export const MainPage: FC<IMainPage> = ({}) => {
         isActive={modalActive} 
         setIsactive={handleActive}
         onClick={handleActive} 
-        filmName={handleFilmName} 
+        filmName={handleFilmTitle} 
         yearFrom={handleYearFrom} 
         yearTo={handleYearTo}
         ratingFrom={handleRatingFrom}

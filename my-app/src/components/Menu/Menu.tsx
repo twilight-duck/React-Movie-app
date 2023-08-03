@@ -22,6 +22,7 @@ export const Menu: FC<IMenu> = () => {
                 <li className="menu-list-item"><a className='menu-list-link' href=""><TrendsIcon/>Trends</a></li>
                 <Link to='/favorites'><li className="menu-list-item"><a className='menu-list-link' href=""><FavoritesIcon/>Favorites</a></li></Link>
                 <Link to='/settings'><li className="menu-list-item"><a className='menu-list-link' href=""><SettingsIcon/> Settings</a></li></Link>
+                <Link to='/sign-in'><li className="menu-list-item"><a className='menu-list-link' href="">Log Out</a></li></Link>
             </ul>
             </div>
         

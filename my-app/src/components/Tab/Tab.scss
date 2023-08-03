@@ -8,24 +8,38 @@
     
     &.active{
         border-radius: 10px;
-        background: #323537;
         padding: 16px 88px;
         cursor: pointer;
 
         &:hover {
             color: inherit;
         }
+
+        &.light{
+            background: #fff;
+            color: #242426;
+            border: 2px solid #AFB2B6;
+        }
+
+        &.dark{
+            background: #242426;
+           
+        }
     }
 
     &.disabled {
         color: #80858B;
-        background: #242426;
         padding: 16px 88px;
         border-radius: 10px 0 0 10px;
         cursor: pointer;
         
         &:hover {
             color: inherit;
+        }
+
+        &.light{
+            background: #fff;
+            color: #80858B;
         }
 
         }

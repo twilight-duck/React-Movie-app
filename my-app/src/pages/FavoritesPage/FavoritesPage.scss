@@ -20,3 +20,16 @@
         }
     }
 }
+
+
+.favorites{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 180px;
+    height: 100%;
+
+
+    &-list{
+        display: flex;
+    }
+}

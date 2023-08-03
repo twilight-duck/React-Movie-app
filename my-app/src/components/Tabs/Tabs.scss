@@ -1,6 +1,14 @@
 .tabs{
     display: flex;
-    background: #323537;
     padding: 2px 0 2px 2px;
     border-radius: 10px;
+
+    &.dark{
+        background: #323537;
+    }
+
+    &.light{
+        background: #fff;
+        border: 2px solid #AFB2B6;
+    }
 }

@@ -1,5 +1,9 @@
 .arrow-button{
 
+    &.light svg path{
+        stroke: black;
+    }
+    
     &:hover svg path{
         stroke: #AFB2B6;
     }

@@ -3,5 +3,14 @@
     height: 100%;
     display: flex;
     flex-direction: column;
+
+    &.dark{
+        background-color: #000;
+    }
+
+
+    &.light{
+        background-color: #ffffff;
+    }
 }
 

@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { themeReducer } from "./theme/reducer";
 import { filmsReducer } from "./films/reducer";
+import  favoritesReducer  from "./favorites/favoritesReducer";
 
 const todo = () => {
     return 100;
@@ -10,7 +11,7 @@ const todo = () => {
 export const store = configureStore({
     reducer: {
         theme: themeReducer,
-        films: filmsReducer
+        favorites: favoritesReducer,
     }
 })
 

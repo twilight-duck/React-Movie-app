@@ -7,13 +7,10 @@ import './SearchList.scss';
 
 interface ISearchList {
     filmTitle: string;
-    yearFrom?: string;
-    yearTo?: string;
-    ratingFrom?: string;
-    ratingTo?: string;
+    limit: number;
 }
 
-export const SearchList: FC<ISearchList> = ({filmTitle, yearFrom, yearTo, ratingFrom, ratingTo}) => {
+export const SearchList: FC<ISearchList> = ({filmTitle, limit}) => {
     const[films, setFilms] = useState([]);
 
     const navigate = useNavigate();
@@ -23,11 +20,11 @@ export const SearchList: FC<ISearchList> = ({filmTitle, yearFrom, yearTo, rating
     }
    
     useEffect(() => {
-        fetchFilteredMovies({filmTitle, yearFrom, yearTo, ratingFrom, ratingTo}).then((data) => {
+        fetchFilms({filmTitle, limit}).then((data) => {
             setFilms(data.docs)
             console.log(data)
         }
-    )}, [filmTitle, yearFrom, yearTo, ratingFrom, ratingTo])
+    )}, [filmTitle])
 
 
     return (
@@ -35,7 +32,16 @@ export const SearchList: FC<ISearchList> = ({filmTitle, yearFrom, yearTo, rating
         <h1 className='search-list-title'>Результаты поиска</h1>
         <div className='search-list'>
             {films && films.map((film, index) => (
-                  <FilmCard key={film['id']} id={film['id']} title={film['name']} year={film['year']} poster={film['poster'] ? film['poster']['url'] : ''} onClick={handleClick}/>
+                <FilmCard 
+                     key={film['id']} 
+                     id={film['id']} 
+                     title={film['name']} 
+                     year={film['year']} 
+                     poster={film['poster'] ? film['poster']['url'] : ''} 
+                     onClick={handleClick} 
+                     rating={film['rating']['imdb']}
+                     genre={film['genres'][0]['name']}
+                     />
               ))}
         </div>
     </>

@@ -1,12 +1,16 @@
 import { FC } from 'react';
 import './Logo.scss';
-import  logo  from '../../assets/icons/logo.svg'
+import  {ReactComponent as LogoImg}  from '../../assets/icons/logo.svg'
+import { useAppSelector } from '../../store/hooks';
+import { isDarkTheme } from '../../store/theme/selectors';
 
 
 export const Logo: FC = () => {
+    const isDark = useAppSelector(isDarkTheme)
+
     return (
-        <div>
-            <img src={logo} alt="logo" />
+        <div className={`logo ${isDark ? 'dark' : 'light'}`}>
+            <LogoImg/>
         </div>
     )
 };

@@ -1,12 +1,15 @@
 .film-card{
     width: 266px;
+    position: relative;
+    
 
 
     &-title{
         cursor: pointer;
         transition: all ease 0.4s;
         width: 266px;
-        text-align: center;
+        padding-left: 40px;
+       
 
 
         &:hover{
@@ -16,6 +19,7 @@
 
     &-image{
     transition: transform 0.3s;
+    margin-bottom: 10px;
     
     & img{
         border-radius: 10px;
@@ -26,7 +30,74 @@
     
     &:hover{
     cursor: pointer;
-    transform: scale(0.92);
+    transform: scale(1.05);
 }
+
+}
+
+&-rating{
+    position: absolute;
+    top: 0;
+    right: 18%;
+    padding: 2px 8px;
+    border-radius: 6px;
+    color: #fff;
+
+    &.good{
+        background-color: #00A340;
+    }
+
+    &.bad{
+        background-color: #F3A608;
+    }
+}
+
+&-data{
+    display: flex;
+    gap: 4px;
+    align-self: flex-start;
+    padding-left: 20px;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #80858B;
+}
+
+&-add_to_favorites{
+    background-color: #323537;
+    padding: 12px 40px;
+    border-radius: 6px;
+    position: absolute;
+    bottom: 15%;
+    left: 10%;
+    display: none;
+    transition: all ease-in 0.3s ;
+    z-index: 100;
+
+    &:hover svg path{
+        fill: #7B61FF
+    }
+}
+
+&:hover &-add_to_favorites{
+    display: flex;
+}
+
+&-is_favorite{
+    position: absolute;
+    background-color: #323537;
+    padding: 2px 8px;
+    border-radius: 6px;
+    right: 17%;
+    top: 11%;
+    display: none;
+    z-index: 100;
+    
+    &.active{
+        display: flex;
+    }
+
+    & svg path{
+        fill: #7B61FF;
+    }
 }
 }

@@ -46,7 +46,7 @@ export interface IFullFilm{
    typeNumber: number;
    updateDates: Array<string>;
    updatedAt: string;
-   videos: Object;
+   videos: {trailers: {url: string}[]};
    votes: Object;
    watchability: Object;
    year: number
