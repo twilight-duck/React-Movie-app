@@ -48,7 +48,7 @@ export const SignIn: FC<ISignIn> = ({message}) => {
                         onClick={handleSubmit}/></Link>
                 <p className='sign-in-form-message'>
                     Don't have an account? 
-                    <Link to='/sign-up'><a href="https://example.com">Sign Up</a></Link>
+                    <Link to='/sign-up'><a href="">Sign Up</a></Link>
                 </p>
             </form>
         </div>
